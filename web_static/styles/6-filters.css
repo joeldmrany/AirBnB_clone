@@ -80,3 +80,11 @@ div:hover > .popover {
 .amenities:hover > .popover {
 	display: block;
 }
+.filters h2 {
+	font-size: 16px;
+	display: block;
+	margin-bottom: 2px;
+	padding-bottom: 1px;
+	padding-top: 7px;
+	margin-top: 9px;
+}
