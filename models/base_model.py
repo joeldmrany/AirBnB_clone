@@ -21,6 +21,8 @@ class BaseModel():
                     self.__dict__[key] = datetime.strptime(value, time_theme)
                 else:
                     self.__dict__[key] = value
+        else:
+            models.storage.new(self)
 
     def __str__(self):
         """ representation of the model """
