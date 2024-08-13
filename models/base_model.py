@@ -10,7 +10,7 @@ class BaseModel():
     """ Base Model calss """
 
     def __init__(self, *args, **kwargs):
-        """ for new BaseModel """
+        """ Initializing of a new BaseModel """
         time_theme = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid.uuid4())
         self.created_at = datetime.today()
@@ -21,8 +21,8 @@ class BaseModel():
                     self.__dict__[key] = datetime.strptime(value, time_theme)
                 else:
                     self.__dict__[key] = value
-            else:
-                models.storage.new(self)
+        else:
+            models.storage.new(self)
 
     def __str__(self):
         """ representation of the model """
