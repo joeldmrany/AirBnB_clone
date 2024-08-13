@@ -6,13 +6,13 @@ and that is console
 import cmd
 
 
-class console(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """that is start of cmd console"""
     prompt = '(hbnb) '
 
     def do_quit(self, line):
         """
-        write [quit] to get out from console
+        Quit command to exit the program
         """
         return True
 
@@ -22,6 +22,13 @@ class console(cmd.Cmd):
         """
         return True
 
+    def emptyline(self):
+        """
+        Override the emptyline method to do nothing
+        when an empty line + ENTER is entered
+        """
+        pass
+
 
 if __name__ == '__main__':
-    console().cmdloop()
+    HBNBCommand().cmdloop()
