@@ -4,7 +4,7 @@ base model class
 """
 import uuid
 from datetime import datetime
-
+import models
 
 class BaseModel():
     """ Base Model calss """
@@ -21,6 +21,8 @@ class BaseModel():
                     self.__dict__[key] = datetime.strptime(value, time_theme)
                 else:
                     self.__dict__[key] = value
+            else:
+                models.strage.new(self)
 
     def __str__(self):
         """ representation of the model """
@@ -30,6 +32,7 @@ class BaseModel():
     def save(self):
         """ save the model """
         self.updated_at = datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         cp_dict = self.__dict__.copy()
