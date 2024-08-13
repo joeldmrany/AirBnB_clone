@@ -22,7 +22,7 @@ class BaseModel():
                 else:
                     self.__dict__[key] = value
             else:
-                models.strage.new(self)
+                models.storage.new(self)
 
     def __str__(self):
         """ representation of the model """
