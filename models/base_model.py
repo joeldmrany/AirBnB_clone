@@ -4,7 +4,7 @@ base model class
 """
 import uuid
 from datetime import datetime
-from models import storage
+import models
 
 class BaseModel():
     """ Base Model calss """
