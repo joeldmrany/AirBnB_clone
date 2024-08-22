@@ -35,10 +35,14 @@ class FileStorage:
         """ deserializes """
         try:
             with open(FileStorage.__file_path) as f:
-                obj_dict = json.load(f)
-                for o in obj_dict.values():
-                    cls_name = o["__class__"]
-                    del o["__class__"]
-                    self.new(eval(cls_name)(**o))
+                content = f.read().strip()
+                if content:
+                    obj_dict = json.load(f)
+                    for o in obj_dict.values():
+                        cls_name = o["__class__"]
+                        del o["__class__"]
+                        self.new(eval(cls_name)(**o))
         except FileNotFoundError:
-            return
+            pass
+        except json.JSONDecodeError:
+            pass
