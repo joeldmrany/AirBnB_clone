@@ -38,10 +38,10 @@ class FileStorage:
                 content = f.read().strip()
                 if content:
                     obj_dict = json.load(f)
-                    for o in obj_dict.values():
-                        cls_name = o["__class__"]
-                        del o["__class__"]
-                        self.new(eval(cls_name)(**o))
+                    for key, value in obj_dict.items():
+                        cls_name = value["__class__"]
+                        del value["__class__"]
+                        self.new(eval(cls_name)(**value))
         except FileNotFoundError:
             pass
         except json.JSONDecodeError:
