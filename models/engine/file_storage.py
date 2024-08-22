@@ -40,5 +40,5 @@ class FileStorage:
                     ClsName = o["__class__"]
                     del o["__class__"]
                     delf.new(eval(ClsName)(**o))
-        except: FileNotFoundError:
+        except FileNotFoundError:
             return
