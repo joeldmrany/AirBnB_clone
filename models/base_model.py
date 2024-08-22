@@ -2,7 +2,7 @@
 """
 base model class
 """
-import uuid
+from uuid import uuid4
 from datetime import datetime
 import models
 
@@ -12,7 +12,7 @@ class BaseModel():
     def __init__(self, *args, **kwargs):
         """ Initializing of a new BaseModel """
         time_form = "%Y-%m-%dT%H:%M:%S.%f"
-        self.id = str(uuid.uuid4())
+        self.id = str(uuid4())
         self.created_at = datetime.today()
         self.updated_at = datetime.today()
         if len(kwargs) != 0:
