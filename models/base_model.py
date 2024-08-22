@@ -35,6 +35,7 @@ class BaseModel():
         models.storage.save()
 
     def to_dict(self):
+        """ returns dictionary for base model """
         cp_dict = self.__dict__.copy()
         cp_dict["created_at"] = self.created_at.isoformat()
         cp_dict["updated_at"] = self.updated_at.isoformat()

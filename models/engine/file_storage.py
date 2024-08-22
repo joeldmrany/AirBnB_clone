@@ -1,7 +1,13 @@
 #!/usr/bin/python3
 """ storage file """
 import json
-import os
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -15,19 +21,24 @@ class FileStorage:
 
     def new(self, obj):
         """ set obj """
-        ke = f"{type(obj).__name__}.{obj.id}"
-        FileStorage.__objects[ke] = obj
+        ke = obj.__class__.__name__
+        FileStorage.__objects["{}.{}".format(ke, obj.id)] = obj
 
     def save(self):
         """ serialize """
+        o_dict = FileStorage.__objects
+        obj_dict = {obj: o_dict[obj].to_dict() for obj in o_dict.keys()}
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
-            json.dump(d, f)
+            json.dump(obj_dict, f)
 
     def reload(self):
         """ deserializes """
-        if not os.path.isfile(FileStorage.__file_path):
+        try:
+            with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+                obj_dict = json.load(f)
+                for o in obj_dict.values():
+                    ClsName = o["__class__"]
+                    del o["__class__"]
+                    delf.new(eval(ClsName)(**o))
+        except: FileNotFoundError:
             return
-        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
-            dic_obj = json.load(f)
-            FileStorage.__objects = dic_obj
