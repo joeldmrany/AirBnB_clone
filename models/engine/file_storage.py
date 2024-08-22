@@ -34,11 +34,11 @@ class FileStorage:
     def reload(self):
         """ deserializes """
         try:
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            with open(FileStorage.__file_path, "r") as f:
                 obj_dict = json.load(f)
                 for o in obj_dict.values():
-                    ClsName = o["__class__"]
+                    cls_name = o["__class__"]
                     del o["__class__"]
-                    self.new(eval(ClsName)(**o))
+                    self.new(eval(cls_name)(**o))
         except FileNotFoundError:
             return
