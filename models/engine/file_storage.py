@@ -44,5 +44,3 @@ class FileStorage:
                         self.new(eval(cls_name)(**value))
         except FileNotFoundError:
             pass
-        except json.JSONDecodeError:
-            pass
