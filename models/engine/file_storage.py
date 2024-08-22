@@ -17,7 +17,7 @@ class FileStorage:
 
     def all(self):
         """ get the dictionary """
-        return (FileStorage.__objects)
+        return FileStorage.__objects
 
     def new(self, obj):
         """ set obj """
@@ -28,13 +28,13 @@ class FileStorage:
         """ serialize """
         o_dict = FileStorage.__objects
         obj_dict = {obj: o_dict[obj].to_dict() for obj in o_dict.keys()}
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+        with open(FileStorage.__file_path, "w") as f:
             json.dump(obj_dict, f)
 
     def reload(self):
         """ deserializes """
         try:
-            with open(FileStorage.__file_path, "r") as f:
+            with open(FileStorage.__file_path) as f:
                 obj_dict = json.load(f)
                 for o in obj_dict.values():
                     cls_name = o["__class__"]
