@@ -39,6 +39,6 @@ class FileStorage:
                 for o in obj_dict.values():
                     ClsName = o["__class__"]
                     del o["__class__"]
-                    delf.new(eval(ClsName)(**o))
+                    self.new(eval(ClsName)(**o))
         except FileNotFoundError:
             return
